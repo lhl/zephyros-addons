@@ -135,7 +135,9 @@ def myscript():
 
   def window_id():
       win = zephyros.api.focused_window()
-      zephyros.api.log('%r' % win.id())
+      zephyros.api.log('%r' % zephyros.api.focused_window())
+      zephyros.api.log('%r' % zephyros.api.focused_window())
+      zephyros.api.log('%r' % zephyros.api.focused_window())
 
   def test_trapping():
     zephyros.api.show_bot('test trapping h')
