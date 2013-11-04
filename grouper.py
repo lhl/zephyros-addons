@@ -9,7 +9,10 @@ https://github.com/sdegutis/zephyros/blob/master/Docs/Python.md
 TODO:
 * make sure we can store unique window ids
 * Proper showbox buffer
-* Storing multiple groups
+
+* Store groups in external storage (correlate against Zephyros PID for staleness)
+  * Storing multiple groups
+  * Store group long lived
 
 
 Features:
@@ -81,7 +84,7 @@ def myscript():
 
   # h
   def show_help():
-    zephyros.api.show_box('help, blah blah blah')
+    zephyros.api.show_box('in command mode:\n"a" to add a window to a group\n"f" to minimize everything but the group')
 
   # a
   def add_to_group():
