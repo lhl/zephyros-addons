@@ -90,26 +90,21 @@ def myscript():
     zephyros.api.log('%r' % zephyros.api.focused_window().app())
     # zephyros.api.log('%r' % zephyros.api.focused_window())
     # zephyros.api.log('%r' % zephyros.api.focused_window())
-    group.append(zephyros.api.focused_window())
+    group.append(zephyros.api.focused_window().id)
 
   # f
   def focus_group():
-    zephyros.api.log('%r' % zephyros.api.focused_window())
+    # zephyros.api.log('%r' % zephyros.api.focused_window())
 
-    '''
     for w in zephyros.api.all_windows():
-      # zephyros.api.log('A: %r' % w)
-      # zephyros.api.log('B: %r' % group[0])
-      if w in group:
-        # zephyros.api.log('found in group')
-        pass
-      elif not w.minimized() and w not in group:
-        # zephyros.api.log('not in group')
+      # Unminimize in Group
+      if w.id in group:
+        if w.minimized():
+          w.un_minimize()
+
+      # Minimize everything else
+      else:
         w.minimize()
-      elif w.minimized() and w in group:
-        w.un_minimize()
-    pass
-    '''
 
 
 
@@ -135,9 +130,9 @@ def myscript():
 
   def window_id():
       win = zephyros.api.focused_window()
-      zephyros.api.log('%r' % zephyros.api.focused_window())
-      zephyros.api.log('%r' % zephyros.api.focused_window())
-      zephyros.api.log('%r' % zephyros.api.focused_window())
+      zephyros.api.log('%r' % zephyros.api.focused_window().id)
+      zephyros.api.log('%r' % zephyros.api.focused_window().id)
+      zephyros.api.log('%r' % zephyros.api.focused_window().id)
 
   def test_trapping():
     zephyros.api.show_bot('test trapping h')
@@ -152,8 +147,10 @@ def myscript():
   functions = globals().copy()
   functions.update(locals())
 
-  zephyros.api.bind('ESCAPE', ['Cmd'], window_id)
-  # zephyros.api.bind('ESCAPE', ['Cmd'], toggle_mode)
+  zephyros.api.bind('ESCAPE', ['Cmd'], toggle_mode)
+
+  ### DEBUG
+  # zephyros.api.bind('ESCAPE', ['Cmd'], window_id)
   # zephyros.api.bind('H', [], toggle_mode)
   # zephyros.api.bind('H', None, test_trapping)
   # zephyros.api.bind('F', ['Cmd', 'Shift'], nudge_window)
