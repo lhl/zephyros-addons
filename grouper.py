@@ -35,9 +35,18 @@ buffer
   history
 '''
 
+import subprocess
 import sys
-sys.path.insert(0, '/Applications/_Utilities/Zephyros.app/Contents/Resources/libs/')
+
+
+# zephyros lib
+try:
+  sys.path.insert(0, '/Applications/Zephyros.app/Contents/Resources/libs/')
+except:
+  app_path = subprocess.check_output(['/usr/bin/mdfind', 'kMDItemCFBundleIdentifier == "org.degutis.Zephyros"']).strip()
+  sys.path.insert(0, '%s/Contents/Resources/libs/' % app_path)
 import zephyros
+
 
 
 # Global Variables
@@ -56,6 +65,14 @@ group = []
 
 
 @zephyros.zephyros
+def main():
+  g = Grouper(settings)
+  g.bind()
+
+
+
+
+
 def myscript():
   ### Helpers
   def _bind():
@@ -157,3 +174,9 @@ def myscript():
   # zephyros.api.bind('H', [], toggle_mode)
   # zephyros.api.bind('H', None, test_trapping)
   # zephyros.api.bind('F', ['Cmd', 'Shift'], nudge_window)
+
+
+
+
+if __name__ == '__main__':
+  main()
